@@ -130,34 +130,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </head>
 <body>
 
-<div class="save-toast" id="toast"></div>
+<div class="save-toast show" id="toast">✅ Đã kết nối file backup — tự động ghi mỗi khi nhập liệu</div>
 
 <!-- HEADER -->
 <div class="hdr">
   <div class="hdr-top">
     <div>
       <div class="hdr-nw-label">🐝 Net Worth ước tính</div>
-      <div class="hdr-nw" id="hdr-nw" style="color: rgb(252, 165, 165);">-274.003.902đ</div>
+      <div class="hdr-nw" id="hdr-nw" style="color: rgb(252, 165, 165);">-276.206.705đ</div>
       <div style="font-size:10px;opacity:.7;margin-top:2px">Cập nhật: <span id="hdr-update-date">09/09/2026</span></div>
     </div>
     <button class="export-btn" onclick="exportExcel()">📊 Xuất Excel</button>
     <button class="export-btn" onclick="exportHTML()" style="background:rgba(72,187,120,.15);color:#68d391;margin-left:6px" title="Tải file HTML với dữ liệu hiện tại">💾 Tải HTML</button>
-    <button id="bk-btn" class="export-btn" onclick="setupBackup()" style="margin-left:6px" title="Chọn file để tự động ghi đè mỗi khi nhập liệu mới">🔗 Backup tự động</button>
+    <button id="bk-btn" class="export-btn" onclick="setupBackup()" style="margin-left: 6px; background: rgba(72, 187, 120, 0.25); color: rgb(104, 211, 145);" title="Chọn file để tự động ghi đè mỗi khi nhập liệu mới">✅ Backup: index.html</button>
     <button class="export-btn" onclick="resetState()" style="background:rgba(229,62,62,.15);color:#fc8181;margin-left:6px" title="Xoá dữ liệu đã lưu và reset về mặc định">↺ Reset</button>
   </div>
   <div class="hdr-stats">
-    <div style="flex:1"><div class="hdr-stat-label">Tổng tài sản</div><div class="hdr-stat-val pos" id="hdr-assets">173.03M</div></div>
-    <div style="flex:1"><div class="hdr-stat-label">Dư nợ thẻ</div><div class="hdr-stat-val neg" id="hdr-debt">14.29M</div></div>
-    <div style="flex:1"><div class="hdr-stat-label">Sao kê tháng</div><div class="hdr-stat-val neg" id="hdr-stmt">12.7M</div></div>
+    <div style="flex:1"><div class="hdr-stat-label">Tổng tài sản</div><div class="hdr-stat-val pos" id="hdr-assets">167.89M</div></div>
+    <div style="flex:1"><div class="hdr-stat-label">Dư nợ thẻ</div><div class="hdr-stat-val neg" id="hdr-debt">11.35M</div></div>
+    <div style="flex:1"><div class="hdr-stat-label">Sao kê tháng</div><div class="hdr-stat-val neg" id="hdr-stmt">11.35M</div></div>
     <div style="flex:1"><div class="hdr-stat-label" id="hdr-cb-label">Cashback 2026</div><div class="hdr-stat-val pos" id="hdr-cb">15.98M</div></div>
   </div>
 </div>
 
 <!-- TABS -->
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('overview',this)">📊 Tổng quan</div>
+  <div class="tab" onclick="switchTab('overview',this)">📊 Tổng quan</div>
   <div class="tab" onclick="switchTab('goals',this)">🎯 Mục tiêu</div>
-  <div class="tab" onclick="switchTab('accounts',this)">🏦 Tài khoản</div>
+  <div class="tab active" onclick="switchTab('accounts',this)">🏦 Tài khoản</div>
   <div class="tab" onclick="switchTab('cards',this)">💳 Thẻ &amp; Nợ</div>
   <div class="tab" onclick="switchTab('invest',this)">📈 Đầu tư</div>
   <div class="tab" onclick="switchTab('cashback',this)">🎁 Cashback</div>
@@ -168,27 +168,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- ===== OVERVIEW ===== -->
-<div id="s-overview" class="section active content">
+<div id="s-overview" class="section content">
   <div id="overview-note-alerts"></div>
   <div class="edit-hint">✏️ Nhấn vào bất kỳ số nào để chỉnh sửa trực tiếp → Enter hoặc click ra ngoài để lưu.</div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:12px">
-    <div class="mini"><div class="mini-lbl">💵 Tiền mặt</div><div class="mini-val t-blue ev" id="e-bankTotal" onclick="editField('bankTotal',this)">20.18M</div></div>
-    <div class="mini"><div class="mini-lbl">📈 Đầu tư</div><div class="mini-val t-green" id="e-investTotal">129.22M</div></div>
+    <div class="mini"><div class="mini-lbl">💵 Tiền mặt</div><div class="mini-val t-blue ev" id="e-bankTotal" onclick="editField('bankTotal',this)">19.58M</div></div>
+    <div class="mini"><div class="mini-lbl">📈 Đầu tư</div><div class="mini-val t-green" id="e-investTotal">130.67M</div></div>
     <div class="mini" id="mini-cert" style="display:none"><div class="mini-lbl">📋 Bảo lộc</div><div class="mini-val t-green" id="e-certTotal">0M</div></div>
-    <div class="mini" id="mini-ledger" style=""><div class="mini-lbl">📒 Cho mượn</div><div class="mini-val t-blue" id="e-ledgerTotal">19.37M</div></div>
-    <div class="mini"><div class="mini-lbl">💳 Sao kê</div><div class="mini-val t-red" id="e-stmtTotal">12.7M</div></div>
-    <div class="mini"><div class="mini-lbl">📉 Dư nợ thẻ</div><div class="mini-val t-red" id="e-debtTotal">14.29M</div></div>
+    <div class="mini" id="mini-ledger" style=""><div class="mini-lbl">📒 Cho mượn</div><div class="mini-val t-blue" id="e-ledgerTotal">13.37M</div></div>
+    <div class="mini"><div class="mini-lbl">💳 Sao kê</div><div class="mini-val t-red" id="e-stmtTotal">11.35M</div></div>
+    <div class="mini"><div class="mini-lbl">📉 Dư nợ thẻ</div><div class="mini-val t-red" id="e-debtTotal">11.35M</div></div>
     <div class="mini"><div class="mini-lbl">🏦 Khoản vay</div><div class="mini-val t-red" id="e-loanTotal">432.74M</div></div>
   </div>
   <div class="sec-title">🏠 Phân bổ tài sản</div>
-  <div class="card" style="margin-bottom:10px"><div class="chart-wrap"><canvas id="c-asset" style="box-sizing: border-box; display: block; height: 190px; width: 794px;" width="794" height="190"></canvas></div></div>
+  <div class="card" style="margin-bottom:10px"><div class="chart-wrap"><canvas id="c-asset" style="box-sizing: border-box; display: block; height: 190px; width: 794px;" width="2382" height="570"></canvas></div></div>
   <div id="overview-loans"><div class="card" style="margin-bottom:8px;border-left:3px solid #3182ce;padding:10px 13px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <div>
           <span style="font-size:13px;font-weight:800">Home Loan</span>
           <span style="font-size:11px;color:var(--muted);margin-left:6px">Techcombank</span>
         </div>
-        <span class="badge ">21d nữa</span>
+        <span class="badge ">16d nữa</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">
         <div style="text-align:center">
@@ -208,7 +208,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px">
       <div style="font-size:11px;color:var(--muted)">
         📅 <strong>05/10/2026</strong>
-        <span class="badge " style="margin-left:4px">21d nữa</span>
+        <span class="badge " style="margin-left:4px">16d nữa</span>
         
       </div>
       <div style="display:flex;gap:6px;align-items:center">
@@ -236,7 +236,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <span style="font-size:13px;font-weight:800">CashPlus Personal Loan</span>
           <span style="font-size:11px;color:var(--muted);margin-left:6px">UOB</span>
         </div>
-        <span class="badge ">16d nữa</span>
+        <span class="badge ">11d nữa</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">
         <div style="text-align:center">
@@ -256,7 +256,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px">
       <div style="font-size:11px;color:var(--muted)">
         📅 <strong>30/09/2026</strong>
-        <span class="badge " style="margin-left:4px">16d nữa</span>
+        <span class="badge " style="margin-left:4px">11d nữa</span>
         
       </div>
       <div style="display:flex;gap:6px;align-items:center">
@@ -284,15 +284,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="card" style="padding:0;overflow:hidden">
     <table class="tbl"><thead><tr><th>Thẻ</th><th class="tr">Số tiền</th><th class="tr">Đến hạn</th><th></th></tr></thead>
     <tbody id="tb-stmt"><tr style="">
-        <td class="tb">UOB One</td>
-        <td class="tr ev t-red" id="e-sUOB" onclick="editField('sUOB',this)">1.349.717đ</td>
-        <td class="tr tm">23/09</td>
-        <td></td></tr><tr style="">
         <td class="tb">Kbank</td>
         <td class="tr ev t-red" id="e-sKb" onclick="editField('sKb',this)">11.354.308đ</td>
         <td class="tr tm">—</td>
         <td></td></tr></tbody>
-    <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-red" id="tf-stmt">12.704.025đ</td><td></td><td></td></tr></tfoot></table>
+    <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-red" id="tf-stmt">11.354.308đ</td><td></td><td></td></tr></tfoot></table>
   </div>
 </div>
 
@@ -350,7 +346,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- ===== ACCOUNTS ===== -->
-<div id="s-accounts" class="section content">
+<div id="s-accounts" class="section content active">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
     <div class="sec-title" style="margin:0">🏦 Số dư tài khoản</div>
     <button class="btn btn-primary" onclick="toggleAddBankForm()" id="add-bank-btn" style="font-size:11px;padding:3px 10px">+ Thêm TK</button>
@@ -366,48 +362,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="btn btn-gray" onclick="toggleAddBankForm()">Huỷ</button>
     </div>
   </div>
-  <div class="card" style="margin-bottom:10px"><div class="chart-wrap-lg"><canvas id="c-bank"></canvas></div></div>
+  <div class="card" style="margin-bottom:10px"><div class="chart-wrap-lg"><canvas id="c-bank" width="2382" height="720" style="display: block; box-sizing: border-box; height: 240px; width: 794px;"></canvas></div></div>
   <div class="card" style="padding:0;overflow:hidden;margin-bottom:10px">
     <table class="tbl">
       <thead><tr><th>Ngân hàng / Ví</th><th class="tr">Số dư</th><th class="tr">%</th><th></th></tr></thead>
       <tbody id="tb-bank"><tr>
       <td class="ev" onclick="editBankName('bTech',this)" title="Nhấn để sửa tên">Techcombank</td>
-      <td class="tr ev t-blue" id="e-bTech" onclick="editField('bTech',this)">9.605.121đ</td>
-      <td class="tr tm">47.6%</td>
+      <td class="tr ev t-blue" id="e-bTech" onclick="editField('bTech',this)">5.218.501đ</td>
+      <td class="tr tm">26.6%</td>
       <td class="tr"><span onclick="deleteBank('bTech')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bTimo',this)" title="Nhấn để sửa tên">Timo</td>
-      <td class="tr ev t-blue" id="e-bTimo" onclick="editField('bTimo',this)">2.327.357đ</td>
-      <td class="tr tm">11.5%</td>
+      <td class="tr ev t-blue" id="e-bTimo" onclick="editField('bTimo',this)">867.000đ</td>
+      <td class="tr tm">4.4%</td>
       <td class="tr"><span onclick="deleteBank('bTimo')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bMB',this)" title="Nhấn để sửa tên">MB Bank</td>
-      <td class="tr ev t-blue" id="e-bMB" onclick="editField('bMB',this)">965.856đ</td>
-      <td class="tr tm">4.8%</td>
+      <td class="tr ev t-blue" id="e-bMB" onclick="editField('bMB',this)">6.965.856đ</td>
+      <td class="tr tm">35.6%</td>
       <td class="tr"><span onclick="deleteBank('bMB')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bBIDV',this)" title="Nhấn để sửa tên">BIDV</td>
       <td class="tr ev t-blue" id="e-bBIDV" onclick="editField('bBIDV',this)">1.627.000đ</td>
-      <td class="tr tm">8.1%</td>
+      <td class="tr tm">8.3%</td>
       <td class="tr"><span onclick="deleteBank('bBIDV')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bZalo',this)" title="Nhấn để sửa tên">Zalopay</td>
       <td class="tr ev t-blue" id="e-bZalo" onclick="editField('bZalo',this)">2.562.158đ</td>
-      <td class="tr tm">12.7%</td>
+      <td class="tr tm">13.1%</td>
       <td class="tr"><span onclick="deleteBank('bZalo')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bMomo',this)" title="Nhấn để sửa tên">Momo</td>
-      <td class="tr ev t-blue" id="e-bMomo" onclick="editField('bMomo',this)">1.368.141đ</td>
-      <td class="tr tm">6.8%</td>
+      <td class="tr ev t-blue" id="e-bMomo" onclick="editField('bMomo',this)">1.402.757đ</td>
+      <td class="tr tm">7.2%</td>
       <td class="tr"><span onclick="deleteBank('bMomo')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bCIMB',this)" title="Nhấn để sửa tên">CIMB</td>
       <td class="tr ev t-blue" id="e-bCIMB" onclick="editField('bCIMB',this)">297.139đ</td>
       <td class="tr tm">1.5%</td>
       <td class="tr"><span onclick="deleteBank('bCIMB')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bVP',this)" title="Nhấn để sửa tên">VPBank</td>
-      <td class="tr ev t-blue" id="e-bVP" onclick="editField('bVP',this)">507.687đ</td>
-      <td class="tr tm">2.5%</td>
+      <td class="tr ev t-blue" id="e-bVP" onclick="editField('bVP',this)">3.008đ</td>
+      <td class="tr tm">0.0%</td>
       <td class="tr"><span onclick="deleteBank('bVP')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr><tr>
       <td class="ev" onclick="editBankName('bHub',this)" title="Nhấn để sửa tên">Hub for lunch</td>
-      <td class="tr ev t-blue" id="e-bHub" onclick="editField('bHub',this)">918.466đ</td>
-      <td class="tr tm">4.6%</td>
+      <td class="tr ev t-blue" id="e-bHub" onclick="editField('bHub',this)">640.226đ</td>
+      <td class="tr tm">3.3%</td>
       <td class="tr"><span onclick="deleteBank('bHub')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span></td></tr></tbody>
-      <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-blue" id="tf-bank">20.178.925đ</td><td></td><td></td></tr></tfoot>
+      <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-blue" id="tf-bank">19.583.645đ</td><td></td><td></td></tr></tfoot>
     </table>
   </div>
   <div class="sec-title" style="display:flex;align-items:center;justify-content:space-between">
@@ -441,13 +437,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="grid2" style="margin-bottom:10px">
     <div class="card" style="border-left:3px solid var(--red)">
       <div class="card-title">Tổng dư nợ thẻ</div>
-      <div class="card-val t-red" id="e-debtTotal2">14.291.285đ</div>
+      <div class="card-val t-red" id="e-debtTotal2">11.354.308đ</div>
       <div style="font-size:11px;color:var(--muted);margin-top:3px" id="d-debtCount">2 thẻ đang có dư nợ</div>
     </div>
     <div class="card" style="border-left:3px solid var(--yellow)">
       <div class="card-title">Sao kê tháng này</div>
-      <div class="card-val" style="color:var(--yellow)" id="e-stmtTotal2">12.704.025đ</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:3px" id="d-stmtCount">2 thẻ cần thanh toán</div>
+      <div class="card-val" style="color:var(--yellow)" id="e-stmtTotal2">11.354.308đ</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:3px" id="d-stmtCount">1 thẻ cần thanh toán</div>
     </div>
   </div>
 
@@ -471,13 +467,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <table class="tbl">
       <thead><tr><th>Thẻ</th><th class="tr">Sao kê</th><th class="tr">Đến hạn</th><th></th></tr></thead>
       <tbody id="tb-stmt2"><tr style="">
-        <td class="tb ev" onclick="editCardText('stmt','sUOB','card',this)" title="Nhấn để sửa tên">UOB One</td>
-        <td class="tr ev t-red" onclick="editField('sUOB',this)">1.349.717đ</td>
-        <td class="tr ev tm" onclick="editCardText('stmt','sUOB','due',this)" title="Nhấn để sửa hạn">23/09</td>
-        <td style="text-align:right;white-space:nowrap">
-          
-          <span onclick="deleteStmt('sUOB')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span>
-        </td></tr><tr style="">
         <td class="tb ev" onclick="editCardText('stmt','sKb','card',this)" title="Nhấn để sửa tên">Kbank</td>
         <td class="tr ev t-red" onclick="editField('sKb',this)">11.354.308đ</td>
         <td class="tr ev tm" onclick="editCardText('stmt','sKb','due',this)" title="Nhấn để sửa hạn">—</td>
@@ -485,7 +474,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           
           <span onclick="deleteStmt('sKb')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span>
         </td></tr></tbody>
-      <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-red" id="tf-stmt2">12.704.025đ</td><td></td><td></td></tr></tfoot>
+      <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-red" id="tf-stmt2">11.354.308đ</td><td></td><td></td></tr></tfoot>
     </table>
   </div>
 
@@ -516,21 +505,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <td class="tr ev t-red" id="e-dKb" onclick="editField('dKb',this)">11.354.308đ</td>
       <td class="tr" style="text-align:right">
         <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px">
-          <span class="badge br">79%</span>
+          <span class="badge br">100%</span>
           <button onclick="openDebtPayModal('dKb')" style="font-size:11px;padding:2px 8px;border-radius:5px;border:1px solid #38a169;background:rgba(56,161,105,.12);color:#38a169;cursor:pointer;white-space:nowrap" title="Ghi nhận đã thanh toán thẻ">✓ Đã TT</button>
           <span onclick="deleteDebt('dKb')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span>
         </div>
       </td></tr><tr>
       <td class="tb ev" onclick="editCardText('debt','dUOB','card',this)" title="Nhấn để sửa tên">UOB</td>
-      <td class="tr ev t-red" id="e-dUOB" onclick="editField('dUOB',this)">2.936.977đ</td>
+      <td class="tr ev t-red" id="e-dUOB" onclick="editField('dUOB',this)">0đ</td>
       <td class="tr" style="text-align:right">
         <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px">
-          <span class="badge br">21%</span>
-          <button onclick="openDebtPayModal('dUOB')" style="font-size:11px;padding:2px 8px;border-radius:5px;border:1px solid #38a169;background:rgba(56,161,105,.12);color:#38a169;cursor:pointer;white-space:nowrap" title="Ghi nhận đã thanh toán thẻ">✓ Đã TT</button>
+          <span class="badge br">0%</span>
+          <span style="font-size:11px;color:#38a169;font-weight:600">✅ Đã TT</span>
           <span onclick="deleteDebt('dUOB')" style="cursor:pointer;color:var(--muted);font-size:14px;padding:1px 5px;border-radius:4px" title="Xoá">✕</span>
         </div>
       </td></tr></tbody>
-      <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-red" id="tf-debt">14.291.285đ</td><td></td></tr></tfoot>
+      <tfoot><tr><td class="tb">Tổng</td><td class="tr tb t-red" id="tf-debt">11.354.308đ</td><td></td></tr></tfoot>
     </table>
   </div>
   <div class="sec-title" style="justify-content:space-between;margin-top:4px">
@@ -609,7 +598,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px">
       <div style="font-size:11px;color:var(--muted)">
         📅 <strong>05/10/2026</strong>
-        <span class="badge " style="margin-left:4px">21d nữa</span>
+        <span class="badge " style="margin-left:4px">16d nữa</span>
         
       </div>
       <div style="display:flex;gap:6px;align-items:center">
@@ -677,7 +666,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px">
       <div style="font-size:11px;color:var(--muted)">
         📅 <strong>30/09/2026</strong>
-        <span class="badge " style="margin-left:4px">16d nữa</span>
+        <span class="badge " style="margin-left:4px">11d nữa</span>
         
       </div>
       <div style="display:flex;gap:6px;align-items:center">
@@ -870,7 +859,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div style="grid-column:1/-1"><label>Cộng tiền vào tài khoản</label>
           <select id="sf-bank-2" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px">
             <option value="">— Không ghi nhận vào TK —</option>
-            <option value="bTech">Techcombank (9.605.121đ)</option><option value="bTimo">Timo (2.327.357đ)</option><option value="bMB">MB Bank (965.856đ)</option><option value="bBIDV">BIDV (1.627.000đ)</option><option value="bZalo">Zalopay (2.562.158đ)</option><option value="bMomo">Momo (1.368.141đ)</option><option value="bCIMB">CIMB (297.139đ)</option><option value="bVP">VPBank (507.687đ)</option><option value="bHub">Hub for lunch (918.466đ)</option>
+            <option value="bTech">Techcombank (5.218.501đ)</option><option value="bTimo">Timo (867.000đ)</option><option value="bMB">MB Bank (6.965.856đ)</option><option value="bBIDV">BIDV (1.627.000đ)</option><option value="bZalo">Zalopay (2.562.158đ)</option><option value="bMomo">Momo (1.402.757đ)</option><option value="bCIMB">CIMB (297.139đ)</option><option value="bVP">VPBank (3.008đ)</option><option value="bHub">Hub for lunch (640.226đ)</option>
           </select>
         </div>
       </div>
@@ -1054,7 +1043,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
         <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
           <span style="font-size:14px;font-weight:700;color:var(--text)" class="ev" onclick="editOtherField(8,'name',this)">Vàng Huy Thanh</span>
-          <span style="font-size:11px;background:#fef9c3;border:1px solid #d97706;color:#92400e;padding:1px 7px;border-radius:10px;white-space:nowrap">🥇 4 phân</span>
+          <span style="font-size:11px;background:#fef9c3;border:1px solid #d97706;color:#92400e;padding:1px 7px;border-radius:10px;white-space:nowrap">🥇 5 phân</span>
         </div>
         <div style="display:flex;gap:6px;align-items:center">
           <button class="btn btn-primary" style="font-size:11px;padding:3px 10px" onclick="openOtherInterestModal(8)">💰 Ghi nhận lãi</button>
@@ -1066,11 +1055,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       
       <div class="stock-grid" style="margin-top:8px">
         <div class="stock-stat"><span class="stock-stat-label">Giá trị HT</span>
-          <span class="stock-stat-val editable" onclick="editOtherField(8,'value',this)">5.696.000đ</span></div>
+          <span class="stock-stat-val editable" onclick="editOtherField(8,'value',this)">7.151.500đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">Vốn bỏ ra</span>
-          <span class="stock-stat-val editable" onclick="editOtherField(8,'cost',this)">5.811.637đ</span></div>
+          <span class="stock-stat-val editable" onclick="editOtherField(8,'cost',this)">7.294.733đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">Lời/Lỗ</span>
-          <span class="stock-stat-val t-red">-115.637đ</span></div>
+          <span class="stock-stat-val t-red">-143.233đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">%</span>
           <span class="stock-stat-val t-red">-2.0%</span></div>
         
@@ -1199,11 +1188,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="stock-stat"><span class="stock-stat-label">Giá trị HT</span>
           <span class="stock-stat-val editable" onclick="editOtherField(1,'value',this)">22.249.815đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">Vốn bỏ ra</span>
-          <span class="stock-stat-val editable" onclick="editOtherField(1,'cost',this)">22.249.815đ</span></div>
+          <span class="stock-stat-val editable" onclick="editOtherField(1,'cost',this)">22.400.000đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">Lời/Lỗ</span>
-          <span class="stock-stat-val t-green">+0đ</span></div>
+          <span class="stock-stat-val t-red">-150.185đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">%</span>
-          <span class="stock-stat-val t-green">++0.0%</span></div>
+          <span class="stock-stat-val t-red">-0.7%</span></div>
         
       </div>
       
@@ -1251,11 +1240,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="stock-stat"><span class="stock-stat-label">Giá trị HT</span>
           <span class="stock-stat-val editable" onclick="editOtherField(3,'value',this)">9.172.600đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">Vốn bỏ ra</span>
-          <span class="stock-stat-val editable" onclick="editOtherField(3,'cost',this)">9.172.600đ</span></div>
+          <span class="stock-stat-val editable" onclick="editOtherField(3,'cost',this)">12.170.000đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">Lời/Lỗ</span>
-          <span class="stock-stat-val t-green">+0đ</span></div>
+          <span class="stock-stat-val t-red">-2.997.400đ</span></div>
         <div class="stock-stat"><span class="stock-stat-label">%</span>
-          <span class="stock-stat-val t-green">++0.0%</span></div>
+          <span class="stock-stat-val t-red">-24.6%</span></div>
         
       </div>
       
@@ -1321,18 +1310,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
       <div class="port-section">
         <div><div class="port-section-label">🗂️ Sản phẩm khác (10)</div>
-          <div style="font-size:11px;color:var(--muted)">Giá trị 118.912.444đ • Vốn 116.136.539đ</div></div>
-        <div class="port-section-val t-green">
-          +2.775.905đ
+          <div style="font-size:11px;color:var(--muted)">Giá trị 120.367.944đ • Vốn 120.767.220đ</div></div>
+        <div class="port-section-val t-red">
+          -399.276đ
         </div>
       </div>
       <div class="port-section" style="background:rgba(56,161,105,.06);border-radius:8px;padding:8px 10px;margin-top:4px">
         <div><div style="font-size:12px;font-weight:700">🏆 Tổng danh mục</div>
           <div style="font-size:11px;color:var(--muted)">Vàng + 1 CP + 2 CCQ + 10 khác + 1 đã chốt</div></div>
         <div>
-          <div style="font-size:15px;font-weight:800;color:var(--green);text-align:right">248.130.484đ</div>
+          <div style="font-size:15px;font-weight:800;color:var(--green);text-align:right">251.041.484đ</div>
           <div class="port-section-val t-green" style="font-size:12px;text-align:right">
-            +6.490.692đ P&amp;L
+            +140.330đ P&amp;L
           </div>
         </div>
       </div></div>
@@ -1346,8 +1335,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="card" style="background:linear-gradient(135deg,#ebf8ff,#e6fffa);margin-bottom:12px;border-left:4px solid #3182ce">
     <div class="grid3">
       <div><div class="mini-lbl">💰 Đã cho mượn</div><div class="mini-val t-blue" id="led-total-lent">41.602.260đ</div></div>
-      <div><div class="mini-lbl">⏳ Còn phải thu</div><div class="mini-val t-red" id="led-total-remaining">19.365.840đ</div></div>
-      <div><div class="mini-lbl">✅ Đã thu về</div><div class="mini-val t-green" id="led-total-collected">22.236.420đ</div></div>
+      <div><div class="mini-lbl">⏳ Còn phải thu</div><div class="mini-val t-red" id="led-total-remaining">13.365.840đ</div></div>
+      <div><div class="mini-lbl">✅ Đã thu về</div><div class="mini-val t-green" id="led-total-collected">28.236.420đ</div></div>
     </div>
   </div>
 
@@ -1451,14 +1440,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div style="font-size:11px;color:var(--muted);margin-bottom:6px">mua vé máy bay từ Thái về sài gòn</div>
     <div class="grid3" style="gap:6px;margin-bottom:8px">
       <div><div class="mini-lbl">Đã cho mượn</div><div class="mini-val t-blue">8.000.000đ</div></div>
-      <div><div class="mini-lbl">Đã trả</div><div class="mini-val t-green">0đ</div></div>
-      <div><div class="mini-lbl">Còn lại</div><div class="mini-val t-red">8.000.000đ</div></div>
+      <div><div class="mini-lbl">Đã trả</div><div class="mini-val t-green">6.000.000đ</div></div>
+      <div><div class="mini-lbl">Còn lại</div><div class="mini-val t-red">2.000.000đ</div></div>
     </div>
     <div style="background:var(--border);border-radius:99px;height:6px;overflow:hidden;margin-bottom:4px">
-      <div style="background:#3182ce;height:100%;width:0%;border-radius:99px;transition:width .3s"></div>
+      <div style="background:#3182ce;height:100%;width:75%;border-radius:99px;transition:width .3s"></div>
     </div>
-    <div style="font-size:11px;color:var(--muted);text-align:right">0% đã thu về</div>
+    <div style="font-size:11px;color:var(--muted);text-align:right">75% đã thu về</div>
     
+    <div style="margin-top:8px;border-top:1px solid var(--border);padding-top:7px">
+      <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Lịch sử trả nợ</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:3px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--muted)">17/09/2026</span>
+          <span class="t-green" style="font-weight:600">+3.000.000đ</span>
+          <span style="color:var(--muted);font-size:11px;flex:1;text-align:right;padding-right:6px"></span>
+          <button onclick="deleteLedgerRepayment(4,1)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:0 2px" title="Xoá">×</button>
+        </div><div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:3px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--muted)">16/09/2026</span>
+          <span class="t-green" style="font-weight:600">+3.000.000đ</span>
+          <span style="color:var(--muted);font-size:11px;flex:1;text-align:right;padding-right:6px"></span>
+          <button onclick="deleteLedgerRepayment(4,0)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:0 2px" title="Xoá">×</button>
+        </div>
+    </div>
   </div></div>
 
   <!-- Settled section toggle -->
@@ -1486,9 +1489,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div id="exp-tx-view">
     <!-- Summary bar -->
     <div class="grid3" style="margin-bottom:10px" id="exp-summary">
-      <div class="card"><div class="mini-lbl">Tháng này</div><div class="mini-val t-red">3.744.823đ</div></div>
-      <div class="card"><div class="mini-lbl">Hôm nay</div><div class="mini-val t-red">55.000đ</div></div>
-      <div class="card"><div class="mini-lbl">Số giao dịch</div><div class="mini-val">10</div></div></div>
+      <div class="card"><div class="mini-lbl">Tháng này</div><div class="mini-val t-red">5.576.884đ</div></div>
+      <div class="card"><div class="mini-lbl">Hôm nay</div><div class="mini-val t-red">0đ</div></div>
+      <div class="card"><div class="mini-lbl">Số giao dịch</div><div class="mini-val">21</div></div></div>
 
     <!-- Controls row -->
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">
@@ -1540,56 +1543,156 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div style="margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
             <span>🛍️ Mua sắm</span>
-            <span style="font-weight:700">1.310.222đ <span style="color:var(--muted);font-weight:400">(35%)</span></span>
+            <span style="font-weight:700">2.793.318đ <span style="color:var(--muted);font-weight:400">(50%)</span></span>
           </div>
           <div style="background:var(--bg);border-radius:4px;height:6px">
-            <div style="width:34.98755481901281%;height:100%;background:#d97706;border-radius:4px"></div>
+            <div style="width:50.087432336767264%;height:100%;background:#d97706;border-radius:4px"></div>
           </div>
         </div><div style="margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
             <span>🏠 Nhà ở</span>
-            <span style="font-weight:700">768.828đ <span style="color:var(--muted);font-weight:400">(21%)</span></span>
+            <span style="font-weight:700">768.828đ <span style="color:var(--muted);font-weight:400">(14%)</span></span>
           </div>
           <div style="background:var(--bg);border-radius:4px;height:6px">
-            <div style="width:20.530422933206722%;height:100%;background:#78350f;border-radius:4px"></div>
+            <div style="width:13.785977976231889%;height:100%;background:#78350f;border-radius:4px"></div>
           </div>
         </div><div style="margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
             <span>📦 Khác</span>
-            <span style="font-weight:700">722.587đ <span style="color:var(--muted);font-weight:400">(19%)</span></span>
+            <span style="font-weight:700">722.587đ <span style="color:var(--muted);font-weight:400">(13%)</span></span>
           </div>
           <div style="background:var(--bg);border-radius:4px;height:6px">
-            <div style="width:19.2956249200563%;height:100%;background:#718096;border-radius:4px"></div>
-          </div>
-        </div><div style="margin-bottom:8px">
-          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
-            <span>💡 Hóa đơn &amp; Tiện ích</span>
-            <span style="font-weight:700">413.186đ <span style="color:var(--muted);font-weight:400">(11%)</span></span>
-          </div>
-          <div style="background:var(--bg);border-radius:4px;height:6px">
-            <div style="width:11.033525483046862%;height:100%;background:#059669;border-radius:4px"></div>
-          </div>
-        </div><div style="margin-bottom:8px">
-          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
-            <span>🚗 Di chuyển</span>
-            <span style="font-weight:700">310.000đ <span style="color:var(--muted);font-weight:400">(8%)</span></span>
-          </div>
-          <div style="background:var(--bg);border-radius:4px;height:6px">
-            <div style="width:8.278094852547104%;height:100%;background:#3182ce;border-radius:4px"></div>
+            <div style="width:12.956823200912911%;height:100%;background:#718096;border-radius:4px"></div>
           </div>
         </div><div style="margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
             <span>🍜 Ăn uống</span>
-            <span style="font-weight:700">220.000đ <span style="color:var(--muted);font-weight:400">(6%)</span></span>
+            <span style="font-weight:700">511.965đ <span style="color:var(--muted);font-weight:400">(9%)</span></span>
           </div>
           <div style="background:var(--bg);border-radius:4px;height:6px">
-            <div style="width:5.874776992130202%;height:100%;background:#e53e3e;border-radius:4px"></div>
+            <div style="width:9.180126393161487%;height:100%;background:#e53e3e;border-radius:4px"></div>
+          </div>
+        </div><div style="margin-bottom:8px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+            <span>💡 Hóa đơn &amp; Tiện ích</span>
+            <span style="font-weight:700">413.186đ <span style="color:var(--muted);font-weight:400">(7%)</span></span>
+          </div>
+          <div style="background:var(--bg);border-radius:4px;height:6px">
+            <div style="width:7.408904327219286%;height:100%;background:#059669;border-radius:4px"></div>
+          </div>
+        </div><div style="margin-bottom:8px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+            <span>🚗 Di chuyển</span>
+            <span style="font-weight:700">367.000đ <span style="color:var(--muted);font-weight:400">(7%)</span></span>
+          </div>
+          <div style="background:var(--bg);border-radius:4px;height:6px">
+            <div style="width:6.580735765707159%;height:100%;background:#3182ce;border-radius:4px"></div>
           </div>
         </div>
     </div></div>
 
     <!-- Expense list -->
     <div id="exp-list">
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--border)">18/09/2026</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#3182ce20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🚗</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">đổ xăng</div>
+            <div style="font-size:11px;color:var(--muted)">🚗 Di chuyển</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-50.000đ</div>
+          <span onclick="deleteExpense(79)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">Bún chả Hà Nội</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-53.780đ</div>
+          <span onclick="deleteExpense(80)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#3182ce20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🚗</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">gửi xe</div>
+            <div style="font-size:11px;color:var(--muted)">🚗 Di chuyển</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-7.000đ</div>
+          <span onclick="deleteExpense(81)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--border)">16/09/2026</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">bánh canh chả cá</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-38.232đ</div>
+          <span onclick="deleteExpense(71)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">nước dừa</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-24.083đ</div>
+          <span onclick="deleteExpense(72)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">bánh đúc</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-53.213đ</div>
+          <span onclick="deleteExpense(73)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">gửi xe</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-5.000đ</div>
+          <span onclick="deleteExpense(74)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--border)">15/09/2026</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">bánh bao chiên</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-18.007đ</div>
+          <span onclick="deleteExpense(75)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">bún bò cô xuân</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-58.100đ</div>
+          <span onclick="deleteExpense(76)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#e53e3e20;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🍜</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">Dương chi cam lộ</div>
+            <div style="font-size:11px;color:var(--muted)">🍜 Ăn uống</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-41.550đ</div>
+          <span onclick="deleteExpense(77)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div><div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
+          <div style="width:32px;height:32px;border-radius:8px;background:#d9770620;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🛍️</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600">Mua nhẫn Huy Thanh</div>
+            <div style="font-size:11px;color:var(--muted)">🛍️ Mua sắm</div>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:#e53e3e;white-space:nowrap">-1.483.096đ</div>
+          <span onclick="deleteExpense(78)" style="cursor:pointer;color:var(--muted);font-size:14px;padding:2px 5px;flex-shrink:0" title="Xoá">✕</span>
+        </div>
+    </div>
     <div style="margin-bottom:10px">
       <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--border)">14/09/2026</div>
       <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)20">
@@ -1711,14 +1814,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="card" style="margin-bottom:12px;background:linear-gradient(135deg,var(--card),var(--bg))">
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
       <div style="text-align:center;min-width:80px">
-        <div style="font-size:42px;font-weight:900;color:#38a169;line-height:1">73</div>
+        <div style="font-size:42px;font-weight:900;color:#d97706;line-height:1">65</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px">/100</div>
       </div>
       <div style="flex:1;min-width:160px">
-        <div style="font-size:16px;font-weight:800;color:#38a169">Ổn định</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5">Các chỉ số cơ bản trong ngưỡng quản lý được</div>
+        <div style="font-size:16px;font-weight:800;color:#d97706">Cần chú ý</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5">Một số điểm cần xử lý ngắn hạn</div>
         <div style="margin-top:8px;background:var(--bg);border-radius:6px;height:8px;overflow:hidden">
-          <div style="width:73%;height:100%;background:#38a169;border-radius:6px"></div>
+          <div style="width:65%;height:100%;background:#d97706;border-radius:6px"></div>
         </div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px">Điểm dựa trên: quỹ dự phòng, nợ tiêu dùng, lãi suất, áp lực thanh toán (không tính vay nhà vào nợ xấu)</div>
       </div>
@@ -1730,12 +1833,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
     <div style="background:var(--bg);border-radius:10px;padding:12px 14px;flex:1;min-width:130px">
       <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Tài sản tài chính</div>
-      <div style="font-size:18px;font-weight:800;color:#3182ce">153.66M<span style="font-size:12px;font-weight:500"> </span></div>
+      <div style="font-size:18px;font-weight:800;color:#3182ce">154.53M<span style="font-size:12px;font-weight:500"> </span></div>
       <div style="font-size:11px;color:var(--muted);margin-top:2px">Tiền + đầu tư (không tính BĐS)</div>
     </div>
     <div style="background:var(--bg);border-radius:10px;padding:12px 14px;flex:1;min-width:130px">
       <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Nợ tiêu dùng</div>
-      <div style="font-size:18px;font-weight:800;color:#e53e3e">109.89M<span style="font-size:12px;font-weight:500"> </span></div>
+      <div style="font-size:18px;font-weight:800;color:#e53e3e">106.96M<span style="font-size:12px;font-weight:500"> </span></div>
       <div style="font-size:11px;color:var(--muted);margin-top:2px">Thẻ + vay cá nhân</div>
     </div>
     <div style="background:var(--bg);border-radius:10px;padding:12px 14px;flex:1;min-width:130px">
@@ -1766,10 +1869,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     
       <div style="margin-bottom:7px">
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px">
-          <span>💵 Tiền mặt / TK</span><span style="font-weight:700">20.178.925đ <span style="color:var(--muted);font-weight:400">(13%)</span></span>
+          <span>💵 Tiền mặt / TK</span><span style="font-weight:700">19.583.645đ <span style="color:var(--muted);font-weight:400">(13%)</span></span>
         </div>
         <div style="background:var(--bg);border-radius:3px;height:5px">
-          <div style="width:13.131766935722034%;height:100%;background:#3182ce;border-radius:3px"></div>
+          <div style="width:12.673432530345888%;height:100%;background:#3182ce;border-radius:3px"></div>
         </div>
       </div>
       <div style="margin-bottom:7px">
@@ -1777,7 +1880,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <span>📈 Cổ phiếu</span><span style="font-weight:700">5.344.800đ <span style="color:var(--muted);font-weight:400">(3%)</span></span>
         </div>
         <div style="background:var(--bg);border-radius:3px;height:5px">
-          <div style="width:3.478216402412275%;height:100%;background:#805ad5;border-radius:3px"></div>
+          <div style="width:3.4588536601941415%;height:100%;background:#805ad5;border-radius:3px"></div>
         </div>
       </div>
       <div style="margin-bottom:7px">
@@ -1785,15 +1888,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <span>📊 Chứng chỉ quỹ</span><span style="font-weight:700">4.960.796đ <span style="color:var(--muted);font-weight:400">(3%)</span></span>
         </div>
         <div style="background:var(--bg);border-radius:3px;height:5px">
-          <div style="width:3.2283191657523207%;height:100%;background:#38a169;border-radius:3px"></div>
+          <div style="width:3.2103475663541436%;height:100%;background:#38a169;border-radius:3px"></div>
         </div>
       </div>
       <div style="margin-bottom:7px">
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px">
-          <span>🗂️ Khác (BL + others + piggy)</span><span style="font-weight:700">123.180.444đ <span style="color:var(--muted);font-weight:400">(80%)</span></span>
+          <span>🗂️ Khác (BL + others + piggy)</span><span style="font-weight:700">124.635.944đ <span style="color:var(--muted);font-weight:400">(81%)</span></span>
         </div>
         <div style="background:var(--bg);border-radius:3px;height:5px">
-          <div style="width:80.16169749611338%;height:100%;background:#718096;border-radius:3px"></div>
+          <div style="width:80.65736624310583%;height:100%;background:#718096;border-radius:3px"></div>
         </div>
       </div>
     <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted)">
@@ -1807,7 +1910,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div style="font-size:12px;color:var(--text);margin-top:3px;line-height:1.5"><strong>CashPlus Personal Loan</strong> @ 17.99%/năm — còn 95.601.022đ — lãi mỗi tháng ~1.433.219đ</div>
     </div><div style="border-left:3px solid #d97706;background:#d9770618;border-radius:0 8px 8px 0;padding:10px 12px;margin-bottom:8px">
       <div style="font-weight:700;font-size:13px;color:#d97706">🏦 Quỹ dự phòng quá thấp</div>
-      <div style="font-size:12px;color:var(--text);margin-top:3px;line-height:1.5">TK ngân hàng 20.178.925đ chỉ đủ bù chi phí cố định <strong>1.5 tháng</strong> (gốc+lãi vay + trả góp). Tối thiểu cần 3 tháng = 39.464.900đ.</div>
+      <div style="font-size:12px;color:var(--text);margin-top:3px;line-height:1.5">TK ngân hàng 19.583.645đ chỉ đủ bù chi phí cố định <strong>1.5 tháng</strong> (gốc+lãi vay + trả góp). Tối thiểu cần 3 tháng = 39.464.900đ.</div>
     </div></div>
 
   <!-- Recommendations -->
@@ -1823,7 +1926,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <span style="font-size:10px;font-weight:700;color:#d97706;background:#d9770618;padding:2px 7px;border-radius:10px">🟠 Ngắn hạn</span>
         <span style="font-weight:700;font-size:13px">Xây quỹ dự phòng 3 tháng</span>
       </div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6">Mục tiêu: 39.464.900đ (3 tháng chi cố định). Hiện có 20.178.925đ — cần thêm 19.285.975đ. Nên giữ tại TK tách biệt, không dùng để đầu tư.</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6">Mục tiêu: 39.464.900đ (3 tháng chi cố định). Hiện có 19.583.645đ — cần thêm 19.881.255đ. Nên giữ tại TK tách biệt, không dùng để đầu tư.</div>
     </div><div style="border:1px solid #3182ce30;border-radius:8px;padding:10px 12px;margin-bottom:8px">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
         <span style="font-size:10px;font-weight:700;color:#3182ce;background:#3182ce18;padding:2px 7px;border-radius:10px">🔵 Trung hạn</span>
@@ -1885,7 +1988,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div style="flex:1;min-width:0">
           <div style="font-size:13px;font-weight:700;">Đóng thẻ VIB travel elite</div>
           <div style="font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5">Đóng thẻ VIB travel elite từ ngày 28/03/2027 đến trước ngày 01/04/2027 để không bị phát sinh thêm phí</div>
-          <div style="margin-top:5px;font-size:11px"><span style="color:var(--muted)">📅 28/03/2027 · còn 195 ngày</span></div>
+          <div style="margin-top:5px;font-size:11px"><span style="color:var(--muted)">📅 28/03/2027 · còn 190 ngày</span></div>
         </div>
         <div style="display:flex;gap:5px;flex-shrink:0">
           <button onclick="toggleNoteDone(3)" title="Đánh dấu xong" style="background:var(--green-l);border:1px solid var(--green)30;color:var(--green);padding:2px 8px;border-radius:6px;font-size:12px;cursor:pointer">✓ Xong</button>
@@ -1897,7 +2000,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div style="flex:1;min-width:0">
           <div style="font-size:13px;font-weight:700;">The UOB One</div>
           <div style="font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5">Đã được miễn phí thường niên năm sau, hạn đến 24/08/2027</div>
-          <div style="margin-top:5px;font-size:11px"><span style="color:var(--muted)">📅 24/08/2027 · còn 344 ngày</span></div>
+          <div style="margin-top:5px;font-size:11px"><span style="color:var(--muted)">📅 24/08/2027 · còn 339 ngày</span></div>
         </div>
         <div style="display:flex;gap:5px;flex-shrink:0">
           <button onclick="toggleNoteDone(2)" title="Đánh dấu xong" style="background:var(--green-l);border:1px solid var(--green)30;color:var(--green);padding:2px 8px;border-radius:6px;font-size:12px;cursor:pointer">✓ Xong</button>
@@ -2036,17 +2139,17 @@ const S = {
     {
       "name": "Techcombank",
       "k": "bTech",
-      "v": 9605121
+      "v": 5218501
     },
     {
       "name": "Timo",
       "k": "bTimo",
-      "v": 2327357
+      "v": 867000
     },
     {
       "name": "MB Bank",
       "k": "bMB",
-      "v": 965856
+      "v": 6965856
     },
     {
       "name": "BIDV",
@@ -2061,7 +2164,7 @@ const S = {
     {
       "name": "Momo",
       "k": "bMomo",
-      "v": 1368141
+      "v": 1402757
     },
     {
       "name": "CIMB",
@@ -2071,21 +2174,15 @@ const S = {
     {
       "name": "VPBank",
       "k": "bVP",
-      "v": 507687
+      "v": 3008
     },
     {
       "name": "Hub for lunch",
       "k": "bHub",
-      "v": 918466
+      "v": 640226
     }
   ],
   "stmts": [
-    {
-      "card": "UOB One",
-      "k": "sUOB",
-      "v": 1349717,
-      "due": "23/09"
-    },
     {
       "card": "Kbank",
       "k": "sKb",
@@ -2102,7 +2199,7 @@ const S = {
     {
       "card": "UOB",
       "k": "dUOB",
-      "v": 2936977
+      "v": 0
     }
   ],
   "nextStmtId": 7,
@@ -2216,15 +2313,15 @@ const S = {
     {
       "id": 8,
       "name": "Vàng Huy Thanh",
-      "value": 5696000,
-      "cost": 5811637,
+      "value": 7151500,
+      "cost": 7294733,
       "note": "",
       "interestHistory": [],
       "rate": 0,
       "interestCycle": 3,
       "creditBankKey": "",
       "isGold": true,
-      "goldQty": 4,
+      "goldQty": 5,
       "goldUnit": "phân"
     },
     {
@@ -2287,7 +2384,7 @@ const S = {
       "id": 1,
       "name": "Hanagold",
       "value": 22249815,
-      "cost": 22249815,
+      "cost": 22400000,
       "note": "1 chỉ vật lý + 0.52847 chỉ app",
       "rate": 0,
       "interestCycle": 3,
@@ -2315,7 +2412,7 @@ const S = {
       "id": 3,
       "name": "Hanagold · Bạc",
       "value": 9172600,
-      "cost": 9172600,
+      "cost": 12170000,
       "note": "35.95617 chỉ",
       "rate": 0,
       "interestCycle": 3,
@@ -2449,10 +2546,25 @@ const S = {
       "id": 4,
       "name": "Chị Văn Thiên Trang",
       "amount": 8000000,
-      "remaining": 8000000,
+      "remaining": 2000000,
       "date": "10/09/2026",
       "note": "mua vé máy bay từ Thái về sài gòn",
-      "repayments": [],
+      "repayments": [
+        {
+          "date": "16/09/2026",
+          "amount": 3000000,
+          "bankKey": "bMB",
+          "bankName": "MB Bank",
+          "note": ""
+        },
+        {
+          "date": "17/09/2026",
+          "amount": 3000000,
+          "bankKey": "bMB",
+          "bankName": "MB Bank",
+          "note": ""
+        }
+      ],
       "status": "active"
     }
   ],
@@ -3078,9 +3190,108 @@ const S = {
       "note": "Vé xe Phương Trang",
       "bankKey": "",
       "bankName": ""
+    },
+    {
+      "id": 71,
+      "date": "16/09/2026",
+      "amount": 38232,
+      "category": "🍜 Ăn uống",
+      "note": "bánh canh chả cá",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 72,
+      "date": "16/09/2026",
+      "amount": 24083,
+      "category": "🍜 Ăn uống",
+      "note": "nước dừa",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 73,
+      "date": "16/09/2026",
+      "amount": 53213,
+      "category": "🍜 Ăn uống",
+      "note": "bánh đúc",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 74,
+      "date": "16/09/2026",
+      "amount": 5000,
+      "category": "🍜 Ăn uống",
+      "note": "gửi xe",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 75,
+      "date": "15/09/2026",
+      "amount": 18007,
+      "category": "🍜 Ăn uống",
+      "note": "bánh bao chiên",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 76,
+      "date": "15/09/2026",
+      "amount": 58100,
+      "category": "🍜 Ăn uống",
+      "note": "bún bò cô xuân",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 77,
+      "date": "15/09/2026",
+      "amount": 41550,
+      "category": "🍜 Ăn uống",
+      "note": "Dương chi cam lộ",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 78,
+      "date": "15/09/2026",
+      "amount": 1483096,
+      "category": "🛍️ Mua sắm",
+      "note": "Mua nhẫn Huy Thanh",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 79,
+      "date": "18/09/2026",
+      "amount": 50000,
+      "category": "🚗 Di chuyển",
+      "note": "đổ xăng",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 80,
+      "date": "18/09/2026",
+      "amount": 53780,
+      "category": "🍜 Ăn uống",
+      "note": "Bún chả Hà Nội",
+      "bankKey": "",
+      "bankName": ""
+    },
+    {
+      "id": 81,
+      "date": "18/09/2026",
+      "amount": 7000,
+      "category": "🚗 Di chuyển",
+      "note": "gửi xe",
+      "bankKey": "",
+      "bankName": ""
     }
   ],
-  "nextExpenseId": 71,
+  "nextExpenseId": 82,
   "notes": [
     {
       "id": 2,
